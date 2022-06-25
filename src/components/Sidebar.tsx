@@ -23,9 +23,9 @@ interface GetLessonQueryResponse {
   }[];
 }
 
-export function Sidebar() {
+export function Sidebar(props: {slug: string}) {
   const { data } = useQuery<GetLessonQueryResponse>(GET_LESONS_QUERY);
-  console.log(data);
+
   return (
     <aside className="w-[348px] bg-gray-700 p-6 border-l border-gray-600">
       <span className="font-bold text-2xl pb-6 mb-6 border-b border-gray-500 block">
@@ -35,6 +35,7 @@ export function Sidebar() {
         {data?.lessons.map((lesson) => {
           return (
             <Lesson
+              isActive = {props.slug === lesson.slug}
               key={lesson.id}
               title={lesson.title}
               slug={lesson.slug}
